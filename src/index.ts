@@ -5,7 +5,7 @@ const app: Express = express()
 const port: String | Number = process.env.PORT || 3000
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Express + Typescript Server')
+  res.send('Express + Typescript Server + Postgres')
 })
 
 app.listen(port, () => {
