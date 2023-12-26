@@ -78,6 +78,10 @@ Advanced features
 
 List of resources used to develop the app
 
+#### Typescript
+
+https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-keys-did-you-mean-to-set-the-moduleresolut
+
 #### Mapping resources
 
 - Real time location tracker app on leafletjs || HTML5 geolocation || Tekson https://www.youtube.com/watch?v=8KX4_4NK7ZY

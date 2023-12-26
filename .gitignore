@@ -3,3 +3,6 @@ src/back-end/.env
 
 **/node_modules
 **/package-lock.json
+**/.env
+
+**/.eslintrc.json
