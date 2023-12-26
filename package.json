@@ -1,0 +1,49 @@
+{
+  "name": "spraylakeshore",
+  "version": "1.0.0",
+  "description": "LakeShore Spray app back-end",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "create": "tsx ./db/db.ts createTables",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordansaker/SprayLakeShore.git"
+  },
+  "keywords": [
+    "spray",
+    "lakeshore",
+    "agriculture"
+  ],
+  "author": "Jordan Saker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jordansaker/SprayLakeShore/issues"
+  },
+  "homepage": "https://github.com/jordansaker/SprayLakeShore#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "make-runnable": "^1.4.1",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.10.9",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.5.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
