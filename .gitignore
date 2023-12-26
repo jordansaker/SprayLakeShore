@@ -6,3 +6,4 @@ src/back-end/.env
 **/.env
 
 **/.eslintrc.json
+**/nodemon.json

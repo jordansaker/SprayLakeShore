@@ -2,8 +2,12 @@
   "name": "spraylakeshore",
   "version": "1.0.0",
   "description": "LakeShore Spray app back-end",
-  "main": "index.js",
+  "main": "../build/index.js",
+  "type": "module",
   "scripts": {
+    "build": "tsc",
+    "dev": "nodemon index.ts",
+    "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,7 +37,9 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.5.0",
     "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }
 }
