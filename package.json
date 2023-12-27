@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "LakeShore Spray app back-end",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon src/index.ts",
+    "build": "rm -rf dist && ttsc && cp -R ./src/db/migrations ./dist/db",
+    "dev": "NODE_PATH=src nodemon -r dotenv/config --exec tsx --watch src -e ts src/index.ts",
     "start": "node dist/index.js",
-    "create": "tsx ./db/db.ts createTables",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,7 +28,9 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "make-runnable": "^1.4.1",
-    "pg": "^8.11.3"
+    "node-postgres": "^0.6.2",
+    "pg": "^8.11.3",
+    "postgres-migrations": "^5.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -44,6 +44,8 @@
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "ttsc": "^0.3.1",
+    "typescript": "^5.3.3",
+    "typescript-transform-paths": "^3.4.6"
   }
 }
