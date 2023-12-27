@@ -1,19 +1,7 @@
-import express, { Express, Request, Response } from "express"
-import { db, pool } from "db"
+import app from "app"
+import { db } from "db"
 
-const app: Express = express()
 const port: String | Number = process.env.PORT || 3000
-
-app.get('/', async (req: Request, res: Response) => {
-  try {
-    const result = await pool.query('SELECT * FROM users');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
-  }
-  // res.send('Express + Typescript Server + Postgres')
-})
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
