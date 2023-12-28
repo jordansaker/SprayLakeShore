@@ -4,8 +4,8 @@ import { migrate } from 'postgres-migrations'
 
 let config = {
   database: process.env.DATABASE,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, 
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD, 
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   max: Number(process.env.DB_POOL_SIZE),

@@ -5,3 +5,6 @@ CREATE TABLE IF NOT EXISTS
       user_role varchar(128) NOT NULL,
       password varchar(128) NOT NULL
     );
+
+CREATE TABLE IF NOT EXISTS
+    
