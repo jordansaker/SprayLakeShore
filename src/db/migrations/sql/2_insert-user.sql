@@ -1,1 +1,0 @@
-insert into users(username, email, user_role, password) values ('lakeshore_dev', 'jordan.saker@ymail.com', 'admin', 'password123');
