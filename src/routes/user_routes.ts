@@ -28,10 +28,16 @@ router.get('/', async (req: Request, res: Response) => {
 // get a single user
 router.get('/:username', async (req: Request, res: Response) => {
   try {
-    const username: string = req.params.username
-    const user: QueryResult = await UsersTable.getOne(username)
-    // return the query result
-    res.json(user.rows[0])
+    // execute the query
+    const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
+    if (existingUser.rows[0]) {
+      const username: string = req.params.username
+      const user: QueryResult = await UsersTable.getOne(username)
+      // return the query result
+      res.json(user.rows[0])
+    } else {
+      res.status(404).json({ message: 'User not found' })
+    }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
   }
@@ -68,7 +74,7 @@ router.delete('/:username', async (req: Request, res: Response) => {
       // return the password update msg
       res.json({ message: 'User deleted' })
     } else {
-      res.json({ message: 'User not found' })
+      res.status(404).json({ message: 'User not found' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
@@ -79,16 +85,22 @@ router.delete('/:username', async (req: Request, res: Response) => {
 // reset the user's password
 router.post('/:username', async (req: Request, res: Response) => {
   try {
-    // hash the new password
-    const newHashedPassword: string = await bcrypt.hash(req.body.password, saltRounds)
     // execute the query
-    const user: QueryResult = await UsersTable.updatePassword(newHashedPassword, req.params.username)
-    // return the password update msg
-    const updatedUserRecord: ReturnObject = {
-      record: [user.rows[0]],
-      message: 'Password updated'
+    const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
+    if (existingUser.rows[0]) {
+      // hash the new password
+      const newHashedPassword: string = await bcrypt.hash(req.body.password, saltRounds)
+      // execute the query
+      const user: QueryResult = await UsersTable.updatePassword(newHashedPassword, req.params.username)
+      // return the password update msg
+      const updatedUserRecord: ReturnObject = {
+        record: [user.rows[0]],
+        message: 'Password updated'
+      }
+      res.status(201).json(updatedUserRecord)
+    } else {
+      res.status(404).json({ message: 'User not found' })
     }
-    res.status(201).json(updatedUserRecord)
   } catch (err: any) {
     res.status(500).send({ error: err.message })
   }
@@ -100,16 +112,22 @@ router.post('/:username', async (req: Request, res: Response) => {
 // update user role
 router.post('/role/:username', async (req: Request, res: Response) => {
   try {
-    const role: string = req.body.user_role
-    const username: string = req.params.username
     // execute the query
-    const user: QueryResult = await UsersTable.updateRole(role, username)
-    // return the role update msg
-    const updatedUserRecord: ReturnObject = {
-      record: [user.rows[0]],
-      message: `Role updated to ${req.body.user_role}`
+    const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
+    if (existingUser.rows[0]) {
+      const role: string = req.body.user_role
+      const username: string = req.params.username
+      // execute the query
+      const user: QueryResult = await UsersTable.updateRole(role, username)
+      // return the role update msg
+      const updatedUserRecord: ReturnObject = {
+        record: [user.rows[0]],
+        message: `Role updated to ${req.body.user_role}`
+      }
+      res.status(201).json(updatedUserRecord)
+    } else {
+      res.status(404).json({ message: 'User not found' })
     }
-    res.status(201).json(updatedUserRecord)
   } catch (err: any) {
     res.status(500).send({ error: err.message })
   }
