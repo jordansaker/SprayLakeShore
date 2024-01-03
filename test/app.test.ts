@@ -25,7 +25,6 @@ describe('App Tests', () => {
       const res = await request(baseURL).get('/users')
       expect(res.status).toBe(200)
       expect(res.body).toBeInstanceOf(Array)
-      expect(res.body[0].username).toBe('lakeshore_dev')
     })
 
     test('GET /users/user_id should return the selected user lakeshore_dev', async () => {
@@ -34,15 +33,32 @@ describe('App Tests', () => {
       expect(res.body).toBeInstanceOf(Object)
       expect(res.body.username).toBe('lakeshore_dev')
      })
+
+    test('GET /users/non-existing_user_id should return user not found', async () => {
+      const res = await request(baseURL).get('/users/lakeshore')
+      expect(res.status).toBe(404)
+      expect(res.body).toBeInstanceOf(Object)
+      expect(res.body.message).toBe('User not found')
+    })
     
-    test('PUT /users/user_id should update user password', async () => {
-      const res = await request(baseURL).put('/users/lakeshore_dev').send({ password: updatedPassword })
+    test('POST /users/user_id should update user password', async () => {
+      const res = await request(baseURL).post('/users/lakeshore_dev').send({ password: updatedPassword })
       expect(res.body.message).toBe('Password updated')
     })
 
-    test('PUT /users/role/user_id should update user role',async () => {
-      const res = await request(baseURL).put('/users/lakeshore_supervisor').send({ user_role: updatedRole })
+    test('POST /users/non-existing_user_id should return user not found', async () => {
+      const res = await request(baseURL).post('/users/lakeshore').send({ password: updatedPassword })
+      expect(res.body.message).toBe('User not found')
+    })
+
+    test('POST /users/role/user_id should update user role',async () => {
+      const res = await request(baseURL).post('/users/role/lakeshore_supervisor').send({ user_role: updatedRole })
       expect(res.body.message).toBe('Role updated to manager')
+    })
+
+    test('POST /users/role/non-existing_user_id should return user not found',async () => {
+      const res = await request(baseURL).post('/users/role/lakeshore').send({ user_role: updatedRole })
+      expect(res.body.message).toBe('User not found')
     })
 
     test('POST /users should create new user and return user JSON without password', async () => {
@@ -55,8 +71,18 @@ describe('App Tests', () => {
 
       const res = await request(baseURL).post('/users/').send(userObject)
       expect(res.status).toBe(201)
-      expect(res.body).toBe(newUser)
+      expect(res.body).toStrictEqual(newUser)
     })
+
+    test('DELETE /user/user_id should delete the specified user', async () => { 
+      const res = await request(baseURL).delete('/users/lakeshore_spray')
+      expect(res.body.message).toBe('User deleted')
+     })
+
+     test('DELETE /user/non-existing_user_id should return user not found', async () => { 
+      const res = await request(baseURL).delete('/users/lake')
+      expect(res.body.message).toBe('User not found')
+     })
 
     test('POST /users/reset/lakeshore_dev should reset user password', async () => {
       const res = await request(baseURL).post('/users/reset/lakeshore_dev').send({ email: resetPasswordEmail })

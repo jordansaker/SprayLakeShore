@@ -98,3 +98,7 @@ https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-k
 #### App design
 
 - https://stackoverflow.com/questions/7324722/cut-corners-using-css
+
+#### Expressjs
+
+- Password reset feature (modemailer) https://dev.to/kelvinvmwinuka/how-to-handle-password-reset-in-expressjs-ipb, https://blog.logrocket.com/implementing-secure-password-reset-node-js/

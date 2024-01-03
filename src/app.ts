@@ -4,6 +4,10 @@ import userRouter from 'routes/user_routes'
 
 const app: Express = express()
 
+// middleware
+app.use(express.json())
+
+// routes
 app.use('/users', userRouter)
 
 
