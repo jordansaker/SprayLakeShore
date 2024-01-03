@@ -55,7 +55,7 @@ Advanced features
 - CSS
 - HTML
 - Postgres
-- MongoDB
+- Docker
 
 ##### Documentation
 

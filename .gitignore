@@ -7,3 +7,6 @@ src/back-end/.env
 
 **/.eslintrc.json
 **/nodemon.json
+**/.mocharc.json
+**/.nycrc.json
+**/babel.config.js
