@@ -13,7 +13,7 @@ interface ReturnObject {
 }
 
 // -------------------------------------- //
-// ----------- ENDPOINTS --------------- //
+// ------------ ENDPOINTS --------------- //
 
 // get all users
 router.get('/', async (req: Request, res: Response) => {
@@ -46,12 +46,11 @@ router.get('/:username', async (req: Request, res: Response) => {
 // create new user
 router.post('/', async (req: Request, res: Response) => {
   try {
-    // hash the user password
-    const password: string = await bcrypt.hash(req.body.password, saltRounds)
     // update the userObject
     // extract the values from the JSON object
-    let userObject: User = { ...req.body, password }
-    let userArray: string[] = [userObject.username, userObject.email, userObject.user_role, userObject.password]
+    // password left blank and will be set using the password reset link endpoint
+    let userObject: User = { ...req.body }
+    let userArray: string[] = [userObject.username, userObject.email, userObject.user_role, '']
     // execute the query
     const user: QueryResult = await UsersTable.createOne(userArray)
     // return the query result
