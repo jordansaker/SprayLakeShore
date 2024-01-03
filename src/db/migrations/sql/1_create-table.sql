@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS
     users(
       username varchar(128) PRIMARY KEY NOT NULL,
-      email varchar(128) NOT NULL,
+      email varchar(128) UNIQUE,
       user_role varchar(128) NOT NULL,  -- admin, manager, supervisor, spray
       password varchar(128) NOT NULL
     );

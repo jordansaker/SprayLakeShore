@@ -39,13 +39,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.pool = exports.db = void 0;
 var path_1 = __importDefault(require("path"));
 var pg_1 = __importDefault(require("pg"));
 var postgres_migrations_1 = require("postgres-migrations");
 var config = {
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    database: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     max: Number(process.env.DB_POOL_SIZE),
@@ -53,6 +54,7 @@ var config = {
     connectionTimeoutMillis: Number(process.env.DB_POOL_CLIENT_CONNECTION_TIMEOUT)
 };
 var pool = new pg_1.default.Pool(config);
+exports.pool = pool;
 var db = {
     runMigrations: function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -82,4 +84,4 @@ var db = {
         });
     }
 };
-exports.default = db;
+exports.db = db;

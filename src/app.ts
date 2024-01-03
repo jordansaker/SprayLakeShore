@@ -11,7 +11,6 @@ app.get('/', async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).send('Internal Server Error');
   }
-  // res.send('Express + Typescript Server + Postgres')
 })
 
 export default app
