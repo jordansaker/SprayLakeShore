@@ -90,4 +90,8 @@ describe('App Tests', () => {
     })
 
    })
+
+  describe('Auth tests', () => {
+
+  })
 }) 
