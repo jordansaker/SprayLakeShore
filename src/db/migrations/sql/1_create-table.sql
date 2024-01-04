@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS
       id SERIAL PRIMARY KEY,
       block_name varchar(128) NOT NULL,
       block_size float(2) NOT NULL,
+      farm varchar(128) NOT NULL,
       fencing polygon                   -- postgis
     );
 
