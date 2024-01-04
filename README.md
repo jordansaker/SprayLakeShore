@@ -102,3 +102,8 @@ https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-k
 #### Expressjs
 
 - Password reset feature (modemailer) https://dev.to/kelvinvmwinuka/how-to-handle-password-reset-in-expressjs-ipb, https://blog.logrocket.com/implementing-secure-password-reset-node-js/
+
+#### Realtime API
+
+- socket.io https://www.youtube.com/watch?v=MbStdet9aVk&t=47s
+- WebSocet Server and Node https://www.youtube.com/watch?v=Gq7fenbjehs
