@@ -1,0 +1,1 @@
+INSERT in operators(first_name, last_name, chem_cert) value ('Jordan', 'Saker', true);
