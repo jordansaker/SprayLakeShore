@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
     tractors(
       id SERIAL PRIMARY KEY,
-      asset_id varchar(128) NOT NULL,
+      asset_id varchar(128) UNIQUE NOT NULL,
       tracking_device varchar(128) NOT NULL,
       gear varchar(128) NOT NULL,
       range varchar(128) NOT NULL,         -- profile picture URL
