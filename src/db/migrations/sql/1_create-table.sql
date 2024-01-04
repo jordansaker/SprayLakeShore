@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
     chemicals(
       id SERIAL PRIMARY KEY,
-      chemical_name varchar(128) NOT NULL,
+      chemical_name varchar(128) UNIQUE NOT NULL,
       targeted_pest varchar(128) NOT NULL,
       chemical_rate int NOT NULL
     );
