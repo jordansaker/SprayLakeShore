@@ -1,5 +1,6 @@
 import request from 'supertest'
 import { User, UserRole } from "../src/models/user"
+import 'dotenv/config'
 
 const baseURL: string = 'http://localhost:3000'
 // Objefcts used in tests

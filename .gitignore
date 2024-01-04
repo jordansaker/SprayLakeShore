@@ -4,6 +4,7 @@ src/back-end/.env
 **/node_modules
 **/package-lock.json
 **/.env
+**/.env.test
 
 **/.eslintrc.json
 **/nodemon.json
