@@ -1,5 +1,5 @@
 interface Chemical {
-  id: number,
+  id?: number,
   chemicalName: string,
   targetedPest: string,
   chemicalRate: number

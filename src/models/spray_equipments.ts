@@ -1,5 +1,5 @@
 interface SprayEquipment {
-  id: number,
+  id?: number,
   sprayEquipment: string
 }
 

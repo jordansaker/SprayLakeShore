@@ -1,5 +1,5 @@
 interface Tractor {
-  id: number,
+  id?: number,
   assetID: string,
   trackingDevice: string,
   gear: string,

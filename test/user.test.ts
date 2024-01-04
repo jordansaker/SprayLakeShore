@@ -1,5 +1,4 @@
 import request from 'supertest'
-import { jest } from '@jest/globals'
 import { User, UserRole } from "models/user"
 
 const baseURL: string = 'http://localhost:3000'
@@ -69,6 +68,12 @@ describe('Users tests', () => {
       const res = await request(baseURL).post('/users/').send(userObject)
       expect(res.status).toBe(201)
       expect(res.body).toStrictEqual(newUser)
+    })
+
+    test('POST /users should return user duplicate error', async () => {
+      const res = await request(baseURL).post('/users/').send(userObject)
+      expect(res.status).toBe(400)
+      expect(res.body.message).toBe('User already exists')
     })
 
     test('DELETE /user/user_id should delete the specified user', async () => { 
