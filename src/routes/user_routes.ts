@@ -50,7 +50,7 @@ router.post('/', async (req: Request, res: Response) => {
     // extract the values from the JSON object
     // password left blank and will be set using the password reset link endpoint
     let userObject: User = { ...req.body }
-    let userArray: string[] = [userObject.username, userObject.email, userObject.user_role, '']
+    let userArray: string[] = [userObject.username, userObject.email, userObject.userRole, '']
     // execute the query
     const user: QueryResult = await UsersTable.createOne(userArray)
     // return the query result
@@ -114,14 +114,14 @@ router.post('/role/:username', async (req: Request, res: Response) => {
     // execute the query
     const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
     if (existingUser.rows[0]) {
-      const role: string = req.body.user_role
+      const role: string = req.body.userRole
       const username: string = req.params.username
       // execute the query
       const user: QueryResult = await UsersTable.updateRole(role, username)
       // return the role update msg
       const updatedUserRecord: ReturnObject = {
         record: [user.rows[0]],
-        message: `Role updated to ${req.body.user_role}`
+        message: `Role updated to ${req.body.userRole}`
       }
       res.status(201).json(updatedUserRecord)
     } else {

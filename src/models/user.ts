@@ -4,7 +4,7 @@ type UserRole = 'admin' | 'manager' | 'supervisor' | 'spray'
 interface User {
   username: string,
   email: string,
-  user_role: UserRole,
+  userRole: UserRole,
   password: string
 }
 
