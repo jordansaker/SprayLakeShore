@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
     wind_drections(
       id SERIAL PRIMARY KEY,
-      direction varchar(128) NOT NULL
+      direction varchar(10) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS
