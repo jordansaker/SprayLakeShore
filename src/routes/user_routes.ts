@@ -55,7 +55,9 @@ router.post('/', async (req: Request, res: Response) => {
     const user: QueryResult = await UsersTable.createOne(userArray)
     // return the query result
     const createdUser: Omit<User, "password"> = {
-      ...user.rows[0]
+      username: user.rows[0].username,
+      email: user.rows[0].email,
+      userRole: user.rows[0].user_role
     }
     res.status(201).json(createdUser)
   } catch (err: any) {
