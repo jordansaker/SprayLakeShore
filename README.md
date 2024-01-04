@@ -106,4 +106,6 @@ https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-k
 #### Realtime API
 
 - socket.io https://www.youtube.com/watch?v=MbStdet9aVk&t=47s
-- WebSocet Server and Node https://www.youtube.com/watch?v=Gq7fenbjehs
+- WebSocket Server and Node https://www.youtube.com/watch?v=Gq7fenbjehs
+- WebSockets crash course https://www.youtube.com/watch?v=2Nt-ZrNP22A
+- Websockets alive https://www.youtube.com/watch?v=cUGRlM3SZ1w
