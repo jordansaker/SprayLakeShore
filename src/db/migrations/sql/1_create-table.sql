@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS
       first_name varchar(128) NOT NULL,
       last_name varchar(128) NOT NULL,
       chem_cert boolean NOT NULL,
-      profile_url text NOT NULL         -- profile picture URL
+      profile_url text         -- profile picture URL
     );
 
 CREATE TABLE IF NOT EXISTS
