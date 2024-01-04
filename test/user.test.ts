@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { User, UserRole } from "models/user"
+import { User, UserRole } from "../src/models/user"
 
 const baseURL: string = 'http://localhost:3000'
 // Objefcts used in tests
