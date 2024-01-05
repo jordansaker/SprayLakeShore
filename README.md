@@ -55,7 +55,7 @@ Advanced features
 - CSS
 - HTML
 - Postgres
-- MongoDB
+- Docker
 
 ##### Documentation
 
@@ -78,6 +78,10 @@ Advanced features
 
 List of resources used to develop the app
 
+#### Typescript
+
+https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-keys-did-you-mean-to-set-the-moduleresolut
+
 #### Mapping resources
 
 - Real time location tracker app on leafletjs || HTML5 geolocation || Tekson https://www.youtube.com/watch?v=8KX4_4NK7ZY
@@ -94,3 +98,26 @@ List of resources used to develop the app
 #### App design
 
 - https://stackoverflow.com/questions/7324722/cut-corners-using-css
+
+#### Expressjs
+
+- Password reset feature (modemailer) https://dev.to/kelvinvmwinuka/how-to-handle-password-reset-in-expressjs-ipb, https://blog.logrocket.com/implementing-secure-password-reset-node-js/
+
+#### Realtime API
+
+- socket.io https://www.youtube.com/watch?v=MbStdet9aVk&t=47s
+- WebSocket Server and Node https://www.youtube.com/watch?v=Gq7fenbjehs
+- WebSockets crash course https://www.youtube.com/watch?v=2Nt-ZrNP22A
+- Websockets alive https://www.youtube.com/watch?v=cUGRlM3SZ1w
+
+#### Google Maps API
+
+- 5. Drawing Shapes #2 - Polylines and Polygons in Google Maps (v3) https://www.youtube.com/watch?v=0KurTm72Vi4
+
+- Adding Polylines to a Google Map 
+
+- Custom map Gooogle maps API https://www.youtube.com/watch?v=CdDXbvBFXLY&t=931s
+
+- Learn Google Maps JavaScript API (Beginners Tutorial) | JavaScript Project #7 https://www.youtube.com/watch?v=2LvwNMgW4vw&t=189s
+
+- Google Maps Javascript API Tutorial - Create and Add Google Maps To Your Website https://www.youtube.com/watch?v=ZscHG5xY_r4&t=25s
