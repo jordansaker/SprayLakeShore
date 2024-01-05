@@ -49,8 +49,9 @@ describe('Chemical tests', () => {
     const res = await request(baseURL).put('/chemicals/Bulldock').send({ chemicalRate: 50 })
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.chemical_rate).toBe(50)
-    expect(res.body.chemical_name).toBe('Bulldock')
+    expect(res.body.row.chemical_rate).toBe(50)
+    expect(res.body.row.chemical_name).toBe('Bulldock')
+    expect(res.body.message).toBe('Chemical updated')
   })
 
   test('PUT /chemicals/:non-existant_chemical_name should return a chemical not found', async () => { 
