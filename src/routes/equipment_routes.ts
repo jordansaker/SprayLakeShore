@@ -74,7 +74,7 @@ router.delete('/:sprayEquipment', async (req: Request, res: Response) => {
     if (checkEquipment.rows[0]) {
       // delete the record
       const deleteEquipment: QueryResult = await EquipmentsTable.deleteOne(req.params.sprayEquipment)
-      // return the updated record
+      // return the deleted message
       res.json({ message: 'Spray equipment deleted' })
     } else {
       res.status(404).json({ message: 'Equipment not found' })
