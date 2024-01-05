@@ -59,7 +59,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
     res.status(201).json(createdUser)
   } catch (err: any) {
-    
+    res.status(500).send({ error: err.message })
   }
 })
 
@@ -69,8 +69,9 @@ router.delete('/:username', async (req: Request, res: Response) => {
     // execute the query
     const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
     if (existingUser.rows[0]) {
-      const deleteUser: QueryResult = await UsersTable.deleteOne(req.params.username)
-      // return the password update msg
+      // delete the user
+      await UsersTable.deleteOne(req.params.username)
+      // return the user deleted message
       res.json({ message: 'User deleted' })
     } else {
       res.status(404).json({ message: 'User not found' })
