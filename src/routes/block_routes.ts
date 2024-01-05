@@ -26,8 +26,8 @@ router.get('/:blockName', async (req: Request, res: Response) => {
   try {
     // execute the query
     const block: QueryResult = await BlocksTable.getOne(req.params.blockName)
-    if (block) {
-      // return the result
+    if (block.rows[0]) {
+      // return the query result
       res.json(block.rows[0])
     } else {
       res.status(404).json({ message: 'Block not found' })
@@ -38,11 +38,11 @@ router.get('/:blockName', async (req: Request, res: Response) => {
 })
 
 // create new block
-router.get('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
     // check for duplicates
     const duplicateCheck: QueryResult = await BlocksTable.getOne(req.body.blockName)
-    if (!duplicateCheck) {
+    if (!duplicateCheck.rows[0]) {
       // extract the values from the JSON object
       let blockArray: string[] = Object.values(req.body)
       // execute the query
@@ -55,7 +55,7 @@ router.get('/', async (req: Request, res: Response) => {
       }
       res.status(201).json(createdBlock)
     } else {
-      res.status(404).json({ message: 'Block already exists' })
+      res.status(400).json({ message: 'Block already exists' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
@@ -67,7 +67,7 @@ router.put('/:blockName', async (req: Request, res: Response) => {
   try {
     // execute the query
     const block: QueryResult = await BlocksTable.getOne(req.params.blockName)
-    if (block) {
+    if (block.rows[0]) {
       // prepare the updateArray
       const updateArray: [string, string, number, string] = [
         req.params.blockName,
@@ -78,7 +78,7 @@ router.put('/:blockName', async (req: Request, res: Response) => {
       // execute the update
       const blockUpdate: QueryResult = await BlocksTable.updateOne(...updateArray)
       // return the result
-      res.json(block.rows[0])
+      res.status(201).json({ row: blockUpdate.rows[0], message: 'Block updated'})
     } else {
       res.status(404).json({ message: 'Block not found' })
     }
@@ -92,7 +92,7 @@ router.put('/zones/:blockName', async (req: Request, res: Response) => {
   try {
     // execute the query
     const block: QueryResult = await BlocksTable.getOne(req.params.blockName)
-    if (block) {
+    if (block.rows[0]) {
       // prepare the updateArray
       const updateArray: [string, any] = [
         req.params.blockName,
@@ -101,7 +101,7 @@ router.put('/zones/:blockName', async (req: Request, res: Response) => {
       // execute the update
       const blockUpdate: QueryResult = await BlocksTable.updateGeom(...updateArray)
       // return the result
-      res.json(block.rows[0])
+      res.status(201).json({ row: blockUpdate.rows[0], message: 'Block zone updated'})
     } else {
       res.status(404).json({ message: 'Block not found' })
     }
@@ -115,7 +115,7 @@ router.delete('/:blockName', async (req: Request, res: Response) => {
   try {
     // execute the query
     const block: QueryResult = await BlocksTable.getOne(req.params.blockName)
-    if (block) {
+    if (block.rows[0]) {
       // delete the block
       await BlocksTable.deleteOne(req.params.blockName)
       // return block deleted message

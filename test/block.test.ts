@@ -22,7 +22,7 @@ describe('Blocks tests', () => {
     const res = await request(baseURL).get('/blocks/LA')
     expect(res.status).toBe(200)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.block_name).toBe('L1A')
+    expect(res.body.block_name).toBe('LA')
   })
 
   test('GET /blocks/:non-existing_block_name should return block not found', async () => { 
@@ -32,15 +32,16 @@ describe('Blocks tests', () => {
   })
 
   test('PUT /blocks/:block_name should update size of selected block', async () => {
-    const res = await request(baseURL).put('/blocks/LA').send({ block_size: 50 }) 
+    const res = await request(baseURL).put('/blocks/LA').send({ blockSize: 50 }) 
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.block_name).toBe('LA')
-    expect(res.body.message).toBe('Block size updated')
+    expect(res.body.row.block_name).toBe('LA')
+    expect(res.body.row.block_size).toBe(50)
+    expect(res.body.message).toBe('Block updated')
   })
 
   test('PUT /blocks/:non-existing_block_name should return block not found', async () => { 
-    const res = await request(baseURL).put('/blocks/Old').send({ block_size: 50 })
+    const res = await request(baseURL).put('/blocks/Old').send({ blockSize: 50 })
     expect(res.status).toBe(404)
     expect(res.body.message).toBe('Block not found')
   })
@@ -49,12 +50,12 @@ describe('Blocks tests', () => {
     const res = await request(baseURL).put('/blocks/zones/LA').send({ block_size: 50 })
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.block_name).toBe('LA')
+    expect(res.body.row.block_name).toBe('LA')
     expect(res.body.message).toBe('Block zone updated')
   })
 
   test('PUT /blocks/zones/:non-existing_block_name should return block not found', async () => { 
-    const res = await request(baseURL).put('/blocks/zones/Old').send({ block_size: 50 })
+    const res = await request(baseURL).put('/blocks/zones/Old').send({ blockSize: 50 })
     expect(res.status).toBe(404)
     expect(res.body.message).toBe('Block not found')
   })
@@ -63,7 +64,7 @@ describe('Blocks tests', () => {
     const res = await request(baseURL).post('/blocks').send(blockObject)
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.block_name).toBe('Test')
+    expect(res.body.blockName).toBe('Test')
   })
 
   test('POST /blocks should return block duplicate error', async () => { 
