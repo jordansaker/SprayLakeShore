@@ -2,7 +2,7 @@ import { pool } from "db"
 import { QueryResult } from "pg"
 
 
-// ---------- USERS TABLE CONTROLLER ----------- //
+// ---------- BLOCKS TABLE CONTROLLER ----------- //
 const BlocksTable = {
   getOne: async (blockName: string): Promise<QueryResult> => {
     return pool.query('SELECT * FROM blocks WHERE block_name=$1', [blockName])
