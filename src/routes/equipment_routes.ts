@@ -23,7 +23,7 @@ router.get('/:sprayEquipment', async (req: Request, res: Response) => {
       // return the query result
       res.json(equipment.rows[0])
     } else {
-      res.status(404).json({ message: 'Equipment not found' })
+      res.status(404).json({ message: 'Spray equipment not found' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
@@ -39,7 +39,7 @@ router.post('/', async (req: Request, res: Response) => {
       // execute the query
       const equipment: QueryResult = await EquipmentsTable.createOne(req.body.sprayEquipment)
       // return the query result
-      res.status(201).json(equipment)
+      res.status(201).json(equipment.rows[0])
     } else {
       res.status(400).json({ message: 'Spray equipment already exists' })
     }
@@ -59,7 +59,7 @@ router.put('/:sprayEquipment', async (req: Request, res: Response) => {
       // return the updated record
       res.status(201).json({ row: updatedEquipment.rows[0], message: 'Spray equipment updated' })
     } else {
-      res.status(404).json({ message: 'Equipment not found' })
+      res.status(404).json({ message: 'Spray equipment not found' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
@@ -77,7 +77,7 @@ router.delete('/:sprayEquipment', async (req: Request, res: Response) => {
       // return the deleted message
       res.json({ message: 'Spray equipment deleted' })
     } else {
-      res.status(404).json({ message: 'Equipment not found' })
+      res.status(404).json({ message: 'Spray equipment not found' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
