@@ -1,7 +1,7 @@
 import request from 'supertest'
 import Tractor from '../src/models/tractors'
 
-const baseURL: string = 'https://localhost:3000'
+const baseURL: string = 'http://localhost:3000'
 
 const newTractor: Tractor = {
   assetID: 'T80',

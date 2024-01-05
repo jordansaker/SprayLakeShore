@@ -1,7 +1,7 @@
 import request from 'supertest'
 import Operator from '../src/models/operators'
 
-const baseURL: string = 'https://localhost:3000'
+const baseURL: string = 'http://localhost:3000'
 
 const newOperator: Operator = {
   firstName: 'Test',
