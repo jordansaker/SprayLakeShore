@@ -66,14 +66,14 @@ describe('Users tests', () => {
         userRole: userObject.userRole
       }
 
-      const res = await request(baseURL).post('/users/').send(userObject)
+      const res = await request(baseURL).post('/users').send(userObject)
       expect(res.status).toBe(201)
       expect(res.body).toStrictEqual(newUser)
     })
 
     test('POST /users should return user duplicate error', async () => {
       const res = await request(baseURL).post('/users/').send(userObject)
-      expect(res.status).toBe(400)
+      expect(res.status).toBe(404)
       expect(res.body.message).toBe('User already exists')
     })
 

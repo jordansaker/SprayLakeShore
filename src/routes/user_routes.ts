@@ -49,15 +49,22 @@ router.post('/', async (req: Request, res: Response) => {
     // password left blank and will be set using the password reset link endpoint
     let userObject: User = { ...req.body }
     let userArray: string[] = [userObject.username, userObject.email, userObject.userRole, '']
-    // execute the query
-    const user: QueryResult = await UsersTable.createOne(userArray)
-    // return the query result
-    const createdUser: Omit<User, "password"> = {
-      username: user.rows[0].username,
-      email: user.rows[0].email,
-      userRole: user.rows[0].user_role
+    // check for duplicates
+    const duplicateCheck: QueryResult = await UsersTable.getOne(userObject.username)
+    if (!duplicateCheck.rows[0]) {
+      // execute the query
+      const user: QueryResult = await UsersTable.createOne(userArray)
+      // return the query result
+      const createdUser: Omit<User, "password"> = {
+        username: user.rows[0].username,
+        email: user.rows[0].email,
+        userRole: user.rows[0].user_role
+      }
+      res.status(201).json(createdUser)
+    } else {
+      res.status(404).json({ message: 'User already exists' })
     }
-    res.status(201).json(createdUser)
+    
   } catch (err: any) {
     res.status(500).send({ error: err.message })
   }
