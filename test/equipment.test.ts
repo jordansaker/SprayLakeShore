@@ -42,7 +42,7 @@ describe('Equipment tests', () => {
     const res = await request(baseURL).put('/equipments/S15').send({ spray_equipment: 'S16' })
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.spray_equipment).toBe('S16')
+    expect(res.body.row.spray_equipment).toBe('S16')
     expect(res.body.message).toBe('Spray equipment updated')
   })
 
