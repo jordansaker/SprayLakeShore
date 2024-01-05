@@ -51,9 +51,10 @@ describe('Operator tests', () => {
     const res = await request(baseURL).put('/operators').send({ chemCert: false })
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Object)
-    expect(res.body.last_name).toBe('Operator')
-    expect(res.body.first_name).toBe('Test')
-    expect(res.body.chem_cert).toBe(false)
+    expect(res.body.row.last_name).toBe('Operator')
+    expect(res.body.row.first_name).toBe('Test')
+    expect(res.body.row.chem_cert).toBe(false)
+    expect(res.body.message).toBe('Operator updated')
   })
 
   test('PUT /operators/:non-existant_last_name/:first_name should return operator not found', async () => {
