@@ -55,7 +55,7 @@ router.put('/:sprayEquipment', async (req: Request, res: Response) => {
     const checkEquipment: QueryResult = await EquipmentsTable.getOne(req.params.sprayEquipment)
     if (checkEquipment.rows[0]) {
       // update the record
-      const updatedEquipment: QueryResult = await EquipmentsTable.updateOne(req.params.sprayEquipment, req.body.sprayEquipment)
+      const updatedEquipment: QueryResult = await EquipmentsTable.updateOne(req.params.sprayEquipment, req.body.sprayEquipment || checkEquipment.rows[0].spray_equipment)
       // return the updated record
       res.status(201).json({ row: updatedEquipment.rows[0], message: 'Spray equipment updated' })
     } else {

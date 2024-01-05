@@ -13,7 +13,7 @@ const ChemicalsTable = {
   updateOne: async (updateChemcial: string, chemicalName: string, targetedPest: string, chemicalRate: number ): Promise<QueryResult> => {
     return pool.query('UPDATE chemicals SET chemical_name=$2, targeted_pest=$3, chemical_rate=$4  WHERE chemical_name=$1 RETURNING *', [updateChemcial, chemicalName, targetedPest, chemicalRate])
   },
-  createOne: async (chemicalArray: [string, string, number]): Promise<QueryResult> => {
+  createOne: async (chemicalArray: (string | number)[]): Promise<QueryResult> => {
     return pool.query('INSERT INTO chemicals(chemical_name, targeted_pest, chemical_rate) values ($1, $2, $3) RETURNING *', [...chemicalArray])
   },
   deleteOne: async (chemicalName: string): Promise<QueryResult> => {
