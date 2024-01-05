@@ -109,3 +109,15 @@ https://stackoverflow.com/questions/71191283/cannot-find-module-ts-transformer-k
 - WebSocket Server and Node https://www.youtube.com/watch?v=Gq7fenbjehs
 - WebSockets crash course https://www.youtube.com/watch?v=2Nt-ZrNP22A
 - Websockets alive https://www.youtube.com/watch?v=cUGRlM3SZ1w
+
+#### Google Maps API
+
+- 5. Drawing Shapes #2 - Polylines and Polygons in Google Maps (v3) https://www.youtube.com/watch?v=0KurTm72Vi4
+
+- Adding Polylines to a Google Map 
+
+- Custom map Gooogle maps API https://www.youtube.com/watch?v=CdDXbvBFXLY&t=931s
+
+- Learn Google Maps JavaScript API (Beginners Tutorial) | JavaScript Project #7 https://www.youtube.com/watch?v=2LvwNMgW4vw&t=189s
+
+- Google Maps Javascript API Tutorial - Create and Add Google Maps To Your Website https://www.youtube.com/watch?v=ZscHG5xY_r4&t=25s

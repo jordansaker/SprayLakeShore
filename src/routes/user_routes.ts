@@ -29,10 +29,8 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:username', async (req: Request, res: Response) => {
   try {
     // execute the query
-    const existingUser: QueryResult = await UsersTable.getOne(req.params.username)
-    if (existingUser.rows[0]) {
-      const username: string = req.params.username
-      const user: QueryResult = await UsersTable.getOne(username)
+    const user: QueryResult = await UsersTable.getOne(req.params.username)
+    if (user.rows[0]) {
       // return the query result
       res.json(user.rows[0])
     } else {
