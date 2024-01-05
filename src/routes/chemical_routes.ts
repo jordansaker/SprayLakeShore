@@ -17,8 +17,13 @@ router.get('/', async (req: Request, res: Response) => {
 // get a single chemical
 router.get('/:chemicalName', async (req: Request, res: Response) => {
   try {
+    // req params have chemical names with '+' separating words i.e Serenade+Opti
+    // removing '+' from the req params
+    const splitParamArray: string[] = req.params.chemicalName.split('+')
+    // join the array elements
+    const chemicalName: string = splitParamArray.join(' ')
     // execute the query
-    const chemical: QueryResult = await ChemicalsTable.getOne(req.params.chemicalName)
+    const chemical: QueryResult = await ChemicalsTable.getOne(chemicalName)
     if (chemical.rows[0]) {
       // return the query result
       res.json(chemical.rows[0])
@@ -37,13 +42,13 @@ router.post('/', async (req: Request, res: Response) => {
     const duplicateCheck: QueryResult = await ChemicalsTable.getOne(req.body.chemicalName)
     if (!duplicateCheck.rows[0]) {
       // convert the request body values to an array
-      const chemicalArray: (string | number)[] = Object.values(req.body)
+      const chemicalArray: (string | number)[] = [req.body.chemicalName, req.body.targetedPest, req.body.chemicalRate]
       // execute the query
       const chemical: QueryResult = await ChemicalsTable.createOne(chemicalArray)
       // return the created chemical
       res.status(201).json(chemical.rows[0])
     } else {
-      res.status(404).json({ message: 'Chemical already exists' })
+      res.status(400).json({ message: 'Chemical already exists' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
@@ -53,12 +58,17 @@ router.post('/', async (req: Request, res: Response) => {
 // update a chemical
 router.put('/:chemicalName', async (req: Request, res: Response) => {
   try {
+    // req params have chemical names with '+' separating words i.e Serenade+Opti
+    // removing '+' from the req params
+    const splitParamArray: string[] = req.params.chemicalName.split('+')
+    // join the array elements
+    const chemicalName: string = splitParamArray.join(' ')
     // execute the query, check if chemical exists
-    const chemical: QueryResult = await ChemicalsTable.getOne(req.params.chemicalName)
+    const chemical: QueryResult = await ChemicalsTable.getOne(chemicalName)
     if (chemical.rows[0]) {
       // prepare the updateArray
       const updateArray: [string, string, string, number] = [
-        req.params.chemicalName,
+        chemicalName,
         req.body.chemicalName || chemical.rows[0].chemical_name,
         req.body.targetedPest || chemical.rows[0].targeted_pest,
         req.body.chemicalRate || chemical.rows[0].chemical_rate 
@@ -66,7 +76,7 @@ router.put('/:chemicalName', async (req: Request, res: Response) => {
       // update the record
       const updatedChemical: QueryResult = await ChemicalsTable.updateOne(...updateArray)
       // return the updated record
-      res.status(201).json({ row: updatedChemical.rows[0], message: '' })
+      res.status(201).json({ row: updatedChemical.rows[0], message: 'Chemical updated' })
     } else {
       res.status(404).json({ message: 'Chemical not found' })
     }
@@ -78,11 +88,16 @@ router.put('/:chemicalName', async (req: Request, res: Response) => {
 // delete a chemical
 router.delete('/:chemicalName', async (req: Request, res: Response) => {
   try {
+    // req params have chemical names with '+' separating words i.e Serenade+Opti
+    // removing '+' from the req params
+    const splitParamArray: string[] = req.params.chemicalName.split('+')
+    // join the array elements
+    const chemicalName: string = splitParamArray.join(' ')
     // execute the query, check if chemical exists
-    const chemical: QueryResult = await ChemicalsTable.getOne(req.params.chemicalName)
+    const chemical: QueryResult = await ChemicalsTable.getOne(chemicalName)
     if (chemical.rows[0]) {
       // execute the query
-      await ChemicalsTable.deleteOne(req.params.chemicalName)
+      await ChemicalsTable.deleteOne(chemicalName)
       // return deleted message
       res.json({ message: 'Chemical deleted' })
     } else {
