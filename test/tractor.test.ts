@@ -51,8 +51,9 @@ describe('Tractors tests', () => {
     const res = await request(baseURL).put('/tractors/T80').send({ equipmentID: 2 })
     expect(res.status).toBe(201)
     expect(res.body).toBeInstanceOf(Array)
-    expect(res.body.asset_id).toBe('T80')
-    expect(res.body.equipment_id).toBe(2)
+    expect(res.body.row.asset_id).toBe('T80')
+    expect(res.body.row.equipment_id).toBe(2)
+    expect(res.body.message).toBe('Tractor updated')
   })
 
   test('PUT /tractors/:non-existant_asset_id should return a tractor not found', async () => {
