@@ -49,7 +49,7 @@ router.post('/', async (req: Request, res: Response) => {
       // return the created tractor
       res.status(201).json(tractor.rows[0])
     } else {
-      res.status(404).json({ message: 'Tractor not found' })
+      res.status(400).json({ message: 'Tractor already exists' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
