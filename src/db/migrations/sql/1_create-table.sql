@@ -35,9 +35,11 @@ CREATE TABLE IF NOT EXISTS
     operators(
       id SERIAL PRIMARY KEY,
       first_name varchar(128) NOT NULL,
+      middle_name varchar(128) NOT NULL,
       last_name varchar(128) NOT NULL,
       chem_cert boolean NOT NULL,
-      profile_url text         -- profile picture URL
+      profile_url text,         -- profile picture URL
+      UNIQUE(first_name, middle_name, last_name)
     );
 
 CREATE TABLE IF NOT EXISTS

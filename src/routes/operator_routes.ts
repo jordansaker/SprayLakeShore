@@ -15,10 +15,10 @@ router.get('/', async (req: Request, res: Response) => {
 })
 
 // get a single operator
-router.get('/:lastName/:firstName', async (req: Request, res: Response) => {
+router.get('/:lastName/:middleName/:firstName', async (req: Request, res: Response) => {
   try {
     // OperatorsTable method getOne() requires fullName
-    const fullName: string = req.params.firstName.concat(' ', req.params.lastName)
+    const fullName: string = req.params.firstName.concat(' ', req.params.middleName, ' ',  req.params.lastName)
     // execute the query
     const operator: QueryResult = await OperatorsTable.getOne(fullName)
     if (operator.rows[0]) {
@@ -36,13 +36,14 @@ router.get('/:lastName/:firstName', async (req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   try {
     // get fullName from req body
-    const fullName: string = req.body.firstName.concat(' ', req.params.lastName)
+    const fullName: string = req.body.firstName.concat(' ', req.body.middleName, ' ',  req.body.lastName)
     // check for duplicates
     const duplicateCheck: QueryResult = await OperatorsTable.getOne(fullName)
     if (!duplicateCheck.rows[0]) {
       // prep the operatorArray
       const operatorArray: string[] = [
         req.body.firstName,
+        req.body.middleName,
         req.body.lastName,
         req.body.chemCert,
         req.body.profileURL || ' '
@@ -60,18 +61,24 @@ router.post('/', async (req: Request, res: Response) => {
 })
 
 // update an operator
-router.put('/:lastName/:firstName', async (req: Request, res: Response) => {
+router.put('/:lastName/:middleName/:firstName', async (req: Request, res: Response) => {
   try {
     // get fullName from req body
-    const fullName: string = req.body.firstName.concat(' ', req.params.lastName)
+    const fullName: string = req.params.firstName.concat(' ', req.params.middleName, ' ',  req.params.lastName)
     // execute the query, check if operator exists
     const operator: QueryResult = await OperatorsTable.getOne(fullName)
     if (operator.rows[0]) {
+      // check for false value in body.chemCert as short circuit is used
+      let  newChemCert: boolean
+      if (req.body.chemCert == undefined) newChemCert = operator.rows[0].chem_cert
+      else if (req.body.chemCert) newChemCert = true
+      else newChemCert = false
       // prepare the update array
-      const updateArray: [string, string, boolean, string, string] = [
+      const updateArray: [string, string, string, boolean, string, string] = [
         req.body.firstName || operator.rows[0].first_name,
+        req.body.middleName || operator.rows[0].middle_name,
         req.body.lastName || operator.rows[0].last_name,
-        req.body.chemCert || operator.rows[0].chem_cert,
+        newChemCert,
         req.body.profileURL || operator.rows[0].profile_url,
         fullName
       ]
@@ -88,10 +95,10 @@ router.put('/:lastName/:firstName', async (req: Request, res: Response) => {
 })
 
 // delete an operator
-router.delete('/:lastName/:firstName', async (req: Request, res: Response) => {
+router.delete('/:lastName/:middleName/:firstName', async (req: Request, res: Response) => {
   try {
     // get fullName from req body
-    const fullName: string = req.body.firstName.concat(' ', req.params.lastName)
+    const fullName: string = req.params.firstName.concat(' ', req.params.middleName, ' ',  req.params.lastName)
     // execute the query, check if operator exists
     const operator: QueryResult = await OperatorsTable.getOne(fullName)
     if (operator.rows[0]) {
@@ -99,6 +106,8 @@ router.delete('/:lastName/:firstName', async (req: Request, res: Response) => {
       await OperatorsTable.deleteOne(fullName)
       // return deleted message
       res.json({ message: 'Operator deleted' })
+    } else {
+      res.status(404).json({ message: 'Operator not found' })
     }
   } catch (err: any) {
     res.status(500).send({ error: err.message })
